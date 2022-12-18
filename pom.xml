@@ -15,6 +15,8 @@
     <description>SpringBootCRUD</description>
     <properties>
         <java.version>11</java.version>
+        <jettyVersion>9.2.0.RC0</jettyVersion>
+        <mainApplication>org.example.Application</mainApplication>
     </properties>
     <dependencies>
         <dependency>
@@ -37,12 +39,12 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.projectlombok</groupId>-->
+        <!--            <artifactId>lombok</artifactId>-->
+        <!--            <version>1.18.12</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
         <!-- https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
         <dependency>
             <groupId>javax.persistence</groupId>
@@ -51,6 +53,7 @@
         </dependency>
 
     </dependencies>
+
 
     <build>
         <plugins>
