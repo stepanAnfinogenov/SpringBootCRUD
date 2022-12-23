@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('stepananfi-dockerhub')
+    }
+
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
         maven "maven-3"
@@ -11,24 +15,43 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Start of stage Build"
-                echo "Building"
 //                  sh 'mvn clean package'
+                sh 'docker build -t stepananfi/spring_boot_crud_app:latest .'
                 echo "End of stage Build"
-                }
+            }
+        }
+        stage('Login') {
+            steps {
+                echo "Start of stage Login"
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                echo "End of stage Login"
+            }
+        }
+        stage('Push') {
+            steps {
+                echo "Start of stage Push"
+                sh 'docker push stepananfi/spring_boot_crud_app:latest'
+                echo "End of stage Push"
+            }
         }
         stage('Test') {
             steps {
                 echo "Start of stage Test"
                 echo "Testing"
                 echo "End of stage Test"
-                }
+            }
         }
         stage('Deploy') {
             steps {
                 echo "Start of stage Deploy"
                 echo "Deploying"
                 echo "End of stage Deploy"
-                }
+            }
+        }
+    }
+    post {
+        always {
+            sh 'docker logout'
         }
     }
 }
