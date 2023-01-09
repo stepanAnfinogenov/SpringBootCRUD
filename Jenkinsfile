@@ -14,7 +14,7 @@ pipeline {
             steps {
                 echo "-------------Start of stage Build-------------"
                 sh 'mvn clean package'
-                sh 'docker build -t stepananfi/spring_boot_crud_app:latest .'
+                sh 'docker build -t stepananfi/spring_boot_crud_app:'+"BUILD_NUMBER-${env.BUILD_NUMBER}" + ' .'
                 echo "-------------End of stage Build-------------"
             }
         }
@@ -28,7 +28,7 @@ pipeline {
         stage('Push') {
             steps {
                 echo "-------------Start of stage Push-------------"
-                sh 'docker push stepananfi/spring_boot_crud_app:latest'
+                sh 'docker push stepananfi/spring_boot_crud_app:'+"BUILD_NUMBER-${env.BUILD_NUMBER}"
                 echo "-------------End of stage Push-------------"
             }
         }
