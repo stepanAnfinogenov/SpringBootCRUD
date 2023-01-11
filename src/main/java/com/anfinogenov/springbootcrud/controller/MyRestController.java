@@ -2,6 +2,7 @@ package com.anfinogenov.springbootcrud.controller;
 
 import com.anfinogenov.springbootcrud.entity.Employee;
 import com.anfinogenov.springbootcrud.service.EmployeeService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,9 @@ public class MyRestController {
   }
 
   @GetMapping("/employees/{id}")
+  @ApiOperation(value = "Finds Employee by id",
+                notes = "Provide an id to look up specific employye from the DB",
+                response = Employee.class)
   public Employee getEmployee(@PathVariable int id) {
     Employee employee = employeeService.getEmployee(id);
 
