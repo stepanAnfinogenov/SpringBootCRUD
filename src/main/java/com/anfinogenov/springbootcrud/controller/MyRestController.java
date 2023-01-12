@@ -24,7 +24,7 @@ public class MyRestController {
     return allEmployees;
   }
 
-  @GetMapping("/employees/id/{id}")
+  @GetMapping("/employees/{id}")
   @ApiOperation(value = "Finds Employee by id",
                 notes = "Provide an id to look up specific employye from the DB",
                 response = Employee.class)
@@ -34,12 +34,11 @@ public class MyRestController {
     return employee;
   }
 
-  //TODO
-  @GetMapping("/employees/name/{name}")
+  @GetMapping("/employees/name")
   @ApiOperation(value = "Finds Employee by name",
-                notes = "Provide an employee's name to look up specific employye from the DB",
+                notes = "Provide an employee's name to look up specific employee from the DB",
                 response = Employee.class)
-  public List<Employee> getEmployeeByName(@PathVariable String name) throws EmployeeNotFoundException {
+  public List<Employee> getEmployeeByName(String name) throws EmployeeNotFoundException {
       try {
         return employeeService.getEmployeeByName(name);
       } catch (Exception e) {
