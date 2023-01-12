@@ -3,6 +3,7 @@ package com.anfinogenov.springbootcrud.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,18 +14,19 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "employees")
+@Builder
 @ApiModel(description = "Details about the Employee")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @ApiModelProperty(notes = "The unique id of the Employee")
-    private  int id;
-
+    private  Integer id;
 
     @Column(name = "name")
     @ApiModelProperty(notes = "The Employee's name")
     private String name;
+
     @Column(name = "surname")
     @ApiModelProperty(notes = "The Employee's surname")
     private String surname;
