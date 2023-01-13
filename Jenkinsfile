@@ -53,7 +53,7 @@ pipeline {
                     def server = "ubuntu@34.252.51.97"
                     def path = "/home/ubuntu/app"
                     def sshKey = "/keyAppServerIreland.pem"
-                    def projectJar = "SpringBootCRUD-0.0.1-SNAPSHOT.jar"
+                    def projectJar = "SpringBootCRUD.jar"
                     deployJar(server, path, projectJar)
                     startJarOnServer()
                     echo "-------------End of stage DeployServer-------------"
@@ -71,7 +71,7 @@ pipeline {
 
 def killRunningProject() {
     def processJava = sh (script: 'ssh -f -i /keyAppServerIreland.pem ubuntu@34.252.51.97 '+ "ps -ef | grep java", returnStdout:true)
-    def numberJavaProcess = processJava.split('      ')[1].substring(0,4)
+    def numberJavaProcess = processJava.split('\\s+')[1]
     sh 'ssh -f -i /keyAppServerIreland.pem ubuntu@34.252.51.97 '+ "kill -9 ${numberJavaProcess}"
 }
 
