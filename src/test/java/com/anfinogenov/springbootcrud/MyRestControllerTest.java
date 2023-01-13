@@ -147,4 +147,11 @@ public class MyRestControllerTest {
                 .andExpect(jsonPath("$", notNullValue()))
                 .andExpect(jsonPath("$.name", is("updatedName1")));
     }
+
+    @Test
+    public void shouldDeleteEmployeeById() throws Exception {
+        mockMvc.perform((MockMvcRequestBuilders.delete("/api/employees/1"))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 }

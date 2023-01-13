@@ -31,7 +31,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo "-------------Start of stage Test-------------"
-                echo "Testing"
+                sh 'mvn test'
                 echo "-------------End of stage Test-------------"
             }
         }
