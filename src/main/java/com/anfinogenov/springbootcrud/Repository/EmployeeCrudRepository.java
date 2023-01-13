@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
+public interface EmployeeCrudRepository extends CrudRepository<Employee, Integer> {
     Optional<List<Employee>> findByName(String name);
+    Long deleteByName(String name);
 }

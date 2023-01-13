@@ -5,6 +5,7 @@ import com.anfinogenov.springbootcrud.entity.Employee;
 //import org.hibernate.Session;
 //import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -49,7 +50,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
     }
 
     @Override
-    public void deleteEmployee(int id) {
+    public void deleteEmployeeById(int id) {
 //        Session session = entityManager.unwrap(Session.class);
 //        Query<Employee> query = session.createQuery("delete from Employee where id =:employeeId");
 //        query.setParameter("employeeId", id);
@@ -57,6 +58,14 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
         Query query = entityManager.createQuery("delete from Employee where id =:employeeId");
         query.setParameter("employeeId", id);
+        query.executeUpdate();
+    }
+
+    @Override
+    public void deleteEmployeeByName(String nameEmpl) {
+
+        Query query = entityManager.createQuery("delete from Employee where name =:employeeName");
+        query.setParameter("employeeName", nameEmpl);
         query.executeUpdate();
     }
 }

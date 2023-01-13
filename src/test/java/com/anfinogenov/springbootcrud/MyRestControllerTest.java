@@ -1,11 +1,8 @@
 package com.anfinogenov.springbootcrud;
 
-import com.anfinogenov.springbootcrud.Repository.EmployeeRepository;
 import com.anfinogenov.springbootcrud.controller.MyRestController;
 import com.anfinogenov.springbootcrud.entity.Employee;
 import com.anfinogenov.springbootcrud.service.EmployeeService;
-import com.anfinogenov.springbootcrud.service.EmployeeServiceImpl;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.junit.Before;
@@ -18,7 +15,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -73,8 +69,8 @@ public class MyRestControllerTest {
     }
 
     @Test
-    public void shouldReturnEmployeeById() throws Exception {
-        Mockito.when(employeeService.getEmployee(RECORD_1.getId())).thenReturn(RECORD_1);
+    public void shouldReturnExistingEmployeeById() throws Exception {
+        Mockito.when(employeeService.getEmployeeById(RECORD_1.getId())).thenReturn(RECORD_1);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/api/employees/1")
@@ -85,7 +81,7 @@ public class MyRestControllerTest {
     }
 
     @Test
-    public void shouldReturnEmployeeByName() throws Exception {
+    public void shouldReturnExistingEmployeeByName() throws Exception {
         List<Employee> records = new ArrayList<>(Arrays.asList(RECORD_1));
 
         Mockito.when(employeeService.getEmployeeByName(RECORD_1.getName())).thenReturn(records);
@@ -124,7 +120,7 @@ public class MyRestControllerTest {
     }
 
     @Test
-    public void shouldUpdateEmployee() throws Exception {
+    public void shouldUpdateExistingEmployee() throws Exception {
         Employee updatedEmployee1 = Employee.builder()
                 .id(1)
                 .name("updatedName1")
@@ -149,8 +145,15 @@ public class MyRestControllerTest {
     }
 
     @Test
-    public void shouldDeleteEmployeeById() throws Exception {
+    public void shouldDeleteExistingEmployeeById() throws Exception {
         mockMvc.perform((MockMvcRequestBuilders.delete("/api/employees/1"))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldDeleteExistingEmployeeByName() throws Exception {
+        mockMvc.perform((MockMvcRequestBuilders.delete("/api/employees?name=name1"))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }

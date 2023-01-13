@@ -1,6 +1,7 @@
 package com.anfinogenov.springbootcrud.service;
 
-import com.anfinogenov.springbootcrud.Repository.EmployeeRepository;
+import com.anfinogenov.springbootcrud.Repository.EmployeeCrudRepository;
+import com.anfinogenov.springbootcrud.Repository.EmployeeJpaRepository;
 import com.anfinogenov.springbootcrud.dao.EmployeeDao;
 import com.anfinogenov.springbootcrud.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeDao employeeDao;
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private EmployeeCrudRepository employeeCrudRepository;
+
+    @Autowired
+    private EmployeeJpaRepository employeeJpaRepository;
 
     @Override
     @Transactional
@@ -34,18 +38,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public Employee getEmployee(int id) {
+    public Employee getEmployeeById(int id) {
         return employeeDao.getEmployees(id);
     }
 
     @Override
-    @Transactional
-    public void deleteEmployee(int id) {
-        employeeDao.deleteEmployee(id);
+    public List<Employee> getEmployeeByName(String name) {
+        return employeeCrudRepository.findByName(name).get();
     }
 
     @Override
-    public List<Employee> getEmployeeByName(String name) {
-        return employeeRepository.findByName(name).get();
+    @Transactional
+    public void deleteEmployeeById(int id) {
+        employeeDao.deleteEmployeeById(id);
+    }
+
+    @Override
+    public void deleteEmployeeByName(String name) {
+        employeeJpaRepository.deleteUsersByName(name);
+//        employeeCrudRepository.deleteByName(name);
     }
 }
