@@ -1,4 +1,4 @@
-package com.anfinogenov.springbootcrud.exceptions;
+package com.anfinogenov.springbootcrud.exception;
 
 public class EmployeeNotFoundException extends Exception {
   public EmployeeNotFoundException(String message) {

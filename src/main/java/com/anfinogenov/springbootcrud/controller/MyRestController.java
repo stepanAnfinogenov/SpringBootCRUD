@@ -1,7 +1,7 @@
 package com.anfinogenov.springbootcrud.controller;
 
 import com.anfinogenov.springbootcrud.entity.Employee;
-import com.anfinogenov.springbootcrud.exceptions.EmployeeNotFoundException;
+import com.anfinogenov.springbootcrud.exception.EmployeeNotFoundException;
 import com.anfinogenov.springbootcrud.service.EmployeeService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class MyRestController {
                 notes = "Provide an id to look up specific employye from the DB",
                 response = Employee.class)
   public Employee getEmployeeById(@PathVariable int id) {
-    Employee employee = employeeService.getEmployee(id);
+    Employee employee = employeeService.getEmployeeById(id);
 
     return employee;
   }
@@ -65,10 +65,16 @@ public class MyRestController {
   }
 
   @DeleteMapping("/employees/{id}")
-  public String deleteEmployee(@PathVariable int id) {
-    employeeService.deleteEmployee(id);
+  public String deleteEmployeeById(@PathVariable int id) {
+    employeeService.deleteEmployeeById(id);
 
     return "Employee with ID = " + id + "was deleted";
+  }
+  @DeleteMapping("/employees")
+  public String deleteEmployeeByName(@RequestParam(value = "name") String name) {
+    employeeService.deleteEmployeeByName(name);
+
+    return "Employee with ID = " + name + " was deleted";
   }
 
 }

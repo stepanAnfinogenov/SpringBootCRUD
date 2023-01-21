@@ -12,5 +12,7 @@ public interface EmployeeDao {
 
     public Employee getEmployees(int id);
 
-    public void deleteEmployee(int id);
+    public void deleteEmployeeById(int id);
+
+    void deleteEmployeeByName(String name);
 }

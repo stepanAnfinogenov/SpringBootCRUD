@@ -1,4 +1,4 @@
-package com.anfinogenov.springbootcrud.Repository;
+package com.anfinogenov.springbootcrud.repository;
 
 import com.anfinogenov.springbootcrud.entity.Employee;
 import org.springframework.data.repository.CrudRepository;
@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
+public interface EmployeeCrudRepository extends CrudRepository<Employee, Integer> {
     Optional<List<Employee>> findByName(String name);
+    Long deleteByName(String name);
 }

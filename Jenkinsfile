@@ -3,6 +3,10 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('stepananfi-dockerhubAccess')
+        PROJECT_JAR = 'SpringBootCRUD.jar'
+        KEY_ACCESS_SERVER = '/keyAppServerIreland.pem'
+        USER_HOST_SERVER = 'ubuntu@34.252.51.97'
+        PATH_APP_SERVER = '/home/ubuntu/app'
     }
 
     tools {
@@ -50,11 +54,7 @@ pipeline {
             steps {
                 script{
                     echo "-------------Start of stage DeployServer-------------"
-                    def server = "ubuntu@34.252.51.97"
-                    def path = "/home/ubuntu/app"
-                    def sshKey = "/keyAppServerIreland.pem"
-                    def projectJar = "SpringBootCRUD-0.0.1-SNAPSHOT.jar"
-                    deployJar(server, path, projectJar)
+                    deployJar()
                     startJarOnServer()
                     echo "-------------End of stage DeployServer-------------"
                 }
@@ -69,16 +69,23 @@ pipeline {
     }
 }
 
+
 def killRunningProject() {
-    def processJava = sh (script: 'ssh -f -i /keyAppServerIreland.pem ubuntu@34.252.51.97 '+ "ps -ef | grep java", returnStdout:true)
-    def numberJavaProcess = processJava.split('      ')[1].substring(0,4)
-    sh 'ssh -f -i /keyAppServerIreland.pem ubuntu@34.252.51.97 '+ "kill -9 ${numberJavaProcess}"
+    echo "killRunningProject started"
+    def processesJava = sh (script: 'ssh -f -i ${KEY_ACCESS_SERVER} ${USER_HOST_SERVER} '+ "ps -ef | grep java", returnStdout:true)
+    def result = "empty"
+    processesJava.toString().split('\n').each {println it.split('\\s+')[1]}
+    result = processesJava.toString().split('\n').findAll { it.endsWith(env.PROJECT_JAR) }
+    echo result.toString()
+    def numberJavaProcess = result.toString().split('\\s+')[1];
+    sh 'ssh -f -i ${KEY_ACCESS_SERVER} ${USER_HOST_SERVER} '+ "kill -9 ${numberJavaProcess}"
+    echo "killRunningProject ended"
 }
 
-def deployJar(def server, def path, def projectJar) {
-    def deploy = sh (script: "scp -r -i /keyAppServerIreland.pem **/${projectJar} ${server}:${path}")
+def deployJar() {
+    def deploy = sh (script: "scp -r -i ${KEY_ACCESS_SERVER} **/${PROJECT_JAR} ${USER_HOST_SERVER}:${PATH_APP_SERVER}")
 }
 
 def startJarOnServer() {
-    sh 'ssh -f -i /keyAppServerIreland.pem ubuntu@34.252.51.97 '+ "bash /home/ubuntu/app/runProject.sh"
+    sh 'ssh -f -i ${KEY_ACCESS_SERVER} ${USER_HOST_SERVER} '+ "bash ${PATH_APP_SERVER}/runProject-${PROJECT_JAR}.sh"
 }
