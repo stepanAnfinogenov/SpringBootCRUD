@@ -65,10 +65,16 @@ public class MyRestController {
   }
 
   @DeleteMapping("/employees/{id}")
-  public String deleteEmployeeById(@PathVariable int id) {
-    employeeService.deleteEmployeeById(id);
+  public String deleteEmployeeById(@PathVariable int[] id) {
+    StringBuilder listDeletedId = new StringBuilder();
 
-    return "Employee with ID = " + id + "was deleted";
+    for(int i = 0; i < id.length; i++) {
+      employeeService.deleteEmployeeById(id[i]);
+      listDeletedId.append(id[i]).append(", ");
+    }
+
+
+    return "Employee with ID = " + listDeletedId + " was deleted";
   }
   @DeleteMapping("/employees")
   public String deleteEmployeeByName(@RequestParam(value = "name") String name) {
