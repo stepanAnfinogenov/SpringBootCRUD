@@ -1,8 +1,8 @@
-package com.anfinogenov.springbootcrud.controller;
+package com.anf2.springbootcrud.rest.controller;
 
-import com.anfinogenov.springbootcrud.entity.Employee;
-import com.anfinogenov.springbootcrud.exception.EmployeeNotFoundException;
-import com.anfinogenov.springbootcrud.service.EmployeeService;
+import com.anf2.springbootcrud.rest.entity.Employee;
+import com.anf2.springbootcrud.rest.exception.EmployeeNotFoundException;
+import com.anf2.springbootcrud.rest.service.EmployeeService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;

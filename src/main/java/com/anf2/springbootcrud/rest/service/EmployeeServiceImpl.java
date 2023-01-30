@@ -1,9 +1,9 @@
-package com.anfinogenov.springbootcrud.service;
+package com.anf2.springbootcrud.rest.service;
 
-import com.anfinogenov.springbootcrud.repository.EmployeeCrudRepository;
-import com.anfinogenov.springbootcrud.repository.EmployeeJpaRepository;
-import com.anfinogenov.springbootcrud.dao.EmployeeDao;
-import com.anfinogenov.springbootcrud.entity.Employee;
+import com.anf2.springbootcrud.rest.repository.EmployeeCrudRepository;
+import com.anf2.springbootcrud.rest.repository.EmployeeJpaRepository;
+import com.anf2.springbootcrud.rest.dao.EmployeeDao;
+import com.anf2.springbootcrud.rest.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

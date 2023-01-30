@@ -1,4 +1,4 @@
-package com.anfinogenov.springbootcrud;
+package com.anf2.springbootcrud.rest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

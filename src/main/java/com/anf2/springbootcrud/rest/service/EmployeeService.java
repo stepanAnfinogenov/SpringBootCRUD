@@ -1,6 +1,6 @@
-package com.anfinogenov.springbootcrud.service;
+package com.anf2.springbootcrud.rest.service;
 
-import com.anfinogenov.springbootcrud.entity.Employee;
+import com.anf2.springbootcrud.rest.entity.Employee;
 
 import java.util.List;
 

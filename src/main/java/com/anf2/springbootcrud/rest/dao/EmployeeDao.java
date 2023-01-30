@@ -1,6 +1,6 @@
-package com.anfinogenov.springbootcrud.dao;
+package com.anf2.springbootcrud.rest.dao;
 
-import com.anfinogenov.springbootcrud.entity.Employee;
+import com.anf2.springbootcrud.rest.entity.Employee;
 
 import java.util.List;
 

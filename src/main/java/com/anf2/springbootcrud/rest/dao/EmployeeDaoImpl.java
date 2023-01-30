@@ -1,11 +1,10 @@
-package com.anfinogenov.springbootcrud.dao;
+package com.anf2.springbootcrud.rest.dao;
 
-import com.anfinogenov.springbootcrud.entity.Employee;
+import com.anf2.springbootcrud.rest.entity.Employee;
 
 //import org.hibernate.Session;
 //import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

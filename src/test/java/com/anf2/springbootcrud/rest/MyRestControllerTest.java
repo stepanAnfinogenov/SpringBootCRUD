@@ -1,8 +1,8 @@
-package com.anfinogenov.springbootcrud;
+package com.anf2.springbootcrud.rest;
 
-import com.anfinogenov.springbootcrud.controller.MyRestController;
-import com.anfinogenov.springbootcrud.entity.Employee;
-import com.anfinogenov.springbootcrud.service.EmployeeService;
+import com.anf2.springbootcrud.rest.controller.MyRestController;
+import com.anf2.springbootcrud.rest.entity.Employee;
+import com.anf2.springbootcrud.rest.service.EmployeeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.junit.Before;

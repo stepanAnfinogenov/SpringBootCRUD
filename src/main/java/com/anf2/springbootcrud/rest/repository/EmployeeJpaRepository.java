@@ -1,6 +1,6 @@
-package com.anfinogenov.springbootcrud.repository;
+package com.anf2.springbootcrud.rest.repository;
 
-import com.anfinogenov.springbootcrud.entity.Employee;
+import com.anf2.springbootcrud.rest.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

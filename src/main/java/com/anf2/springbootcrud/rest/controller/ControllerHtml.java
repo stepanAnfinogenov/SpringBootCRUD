@@ -1,4 +1,4 @@
-package com.anfinogenov.springbootcrud.controller;
+package com.anf2.springbootcrud.rest.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,7 +8,7 @@ public class ControllerHtml {
 
     @RequestMapping("/")
     public String defaultPage1 () {
-        return "<!DOCTYPE html><html><head>TEXT 136<br></head><body>______________________</body></html>";
+        return "<!DOCTYPE html><html><head>TEXT 137<br></head><body>______________________</body></html>";
     }
 
     @RequestMapping("/2")

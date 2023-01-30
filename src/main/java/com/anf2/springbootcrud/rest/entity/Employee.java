@@ -1,4 +1,4 @@
-package com.anfinogenov.springbootcrud.entity;
+package com.anf2.springbootcrud.rest.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
