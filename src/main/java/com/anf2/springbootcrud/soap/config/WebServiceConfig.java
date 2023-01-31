@@ -26,9 +26,9 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     @Bean(name = "employees")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema employeesSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-        wsdl11Definition.setPortTypeName("EmployeesPort");
+        wsdl11Definition.setPortTypeName("anf2ServiceSoapHttp");
         wsdl11Definition.setLocationUri("/ws");
-        wsdl11Definition.setTargetNamespace("http://spring.io/guides/gs-producing-web-service");
+        wsdl11Definition.setTargetNamespace("http://soap.springbootcrud.anf2.com");
         wsdl11Definition.setSchema(employeesSchema);
         return wsdl11Definition;
     }

@@ -1,8 +1,10 @@
 package com.anf2.springbootcrud.soap.endpoint;
 
-import com.anf2.springbootcrud.soap.repository.EmployeeRepository;
-import io.spring.guides.gs_producing_web_service.GetEmployeeRequest;
-import io.spring.guides.gs_producing_web_service.GetEmployeeResponse;
+import com.anf2.springbootcrud.soap.entity.EmployeeInfo;
+import com.anf2.springbootcrud.soap.service.impl.EmployeeServiceImpl;
+import com.anf2.springbootcrud.soap.GetEmployeeByIdRequest;
+import com.anf2.springbootcrud.soap.GetEmployeeResponse;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -11,21 +13,18 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 @Endpoint
 public class EmployeeEndpoint {
-    private static final String NAMESPACE_URI = "http://spring.io/guides/gs-producing-web-service";
-
-    private EmployeeRepository employeeRepository;
+    private static final String NAMESPACE_URI = "http://soap.springbootcrud.anf2.com";
 
     @Autowired
-    public EmployeeEndpoint(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
+    private EmployeeServiceImpl employeeServiceImpl;
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getEmployeeRequest")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getEmployeeByIdRequest")
     @ResponsePayload
-    public GetEmployeeResponse getEmployee(@RequestPayload GetEmployeeRequest request) {
+    public GetEmployeeResponse getEmployee(@RequestPayload GetEmployeeByIdRequest request) {
         GetEmployeeResponse response = new GetEmployeeResponse();
-        response.setEmployee(employeeRepository.findEmployee(request.getName()));
-
+        EmployeeInfo employeeInfo = new EmployeeInfo();
+        BeanUtils.copyProperties(employeeServiceImpl.getEmployeeById(request.getEmployeeId()), employeeInfo);
+        response.setEmployeeInfo(employeeInfo);
         return response;
     }
 }
