@@ -1,6 +1,6 @@
 package com.anf2.springbootcrud.rest;
 
-import com.anf2.springbootcrud.rest.controller.MyRestController;
+import com.anf2.springbootcrud.rest.controller.ControllerRest;
 import com.anf2.springbootcrud.rest.entity.Employee;
 import com.anf2.springbootcrud.rest.service.EmployeeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MyRestControllerTest {
+public class ControllerRestTest {
     private MockMvc mockMvc;
 
     private ObjectMapper objectMapper = new ObjectMapper();
@@ -40,7 +40,7 @@ public class MyRestControllerTest {
     private EmployeeService employeeService;
 
     @InjectMocks
-    MyRestController myRestController;
+    ControllerRest controllerRest;
 
     Employee RECORD_1 = new Employee(1L, "name1", "surname1", "department1", 1111);
     Employee RECORD_2 = new Employee(2L, "name2", "surname2", "department2", 2222);
@@ -49,7 +49,7 @@ public class MyRestControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        this.mockMvc = MockMvcBuilders.standaloneSetup(myRestController).build();
+        this.mockMvc = MockMvcBuilders.standaloneSetup(controllerRest).build();
     }
 
     @Test

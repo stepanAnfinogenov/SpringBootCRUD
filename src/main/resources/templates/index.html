@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+</head>
+<style>
+    .btn-primary {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 5px 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    .button2 {background-color: #f44336;} /* Red */
+</style>
+<body>
+
+<h3>List of employees</h3>
+
+<table class="centered">
+    <tread>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Department</th>
+            <th>Salary</th>
+        </tr>
+    </tread>
+
+    <tbody>
+    <tr th:each="employee: ${employees}">
+        <td th:text="${employee.name}"/>
+        <td th:text="${employee.surname}"/>
+        <td th:text="${employee.department}"/>
+        <td th:text="${employee.salary}"/>
+    </tr>
+    </tbody>
+
+</table>
+
+<form action="#" th:action="@{addEmployee}" th:object="${newemployee}" method="post">
+    <p>name: <input type="text" th:field="*{name}"/></p>
+    <p>surname: <input type="text" th:field="*{surname}"/></p>
+    <p>department: <input type="text" th:field="*{department}"/></p>
+    <p>salary: <input type="text" th:field="*{salary}"/></p>
+    <p><input type="submit" value="create Employee" class="btn btn-primary green"/>
+<!--        <input type="reset" value="delete Employee" class="btn btn-primary button2"/>-->
+    </p>
+</form>
+
+</body>
+</html>
