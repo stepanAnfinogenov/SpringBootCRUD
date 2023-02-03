@@ -10,9 +10,9 @@ public interface EmployeeDao {
 
     public void saveEmployee(Employee employee);
 
-    public Employee getEmployees(int id);
+    public Employee getEmployees(long id);
 
-    public void deleteEmployeeById(int id);
+    public void deleteEmployeeById(long id);
 
     void deleteEmployeeByName(String name);
 }

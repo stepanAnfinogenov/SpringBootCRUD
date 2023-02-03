@@ -19,9 +19,9 @@ import javax.persistence.*;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "employee_id")
     @ApiModelProperty(notes = "The unique id of the Employee")
-    private  Integer id;
+    private  Long employeeId;
 
     @Column(name = "name")
     @ApiModelProperty(notes = "The Employee's name")

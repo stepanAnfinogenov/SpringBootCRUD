@@ -42,9 +42,9 @@ public class MyRestControllerTest {
     @InjectMocks
     MyRestController myRestController;
 
-    Employee RECORD_1 = new Employee(1, "name1", "surname1", "department1", 1111);
-    Employee RECORD_2 = new Employee(2, "name2", "surname2", "department2", 2222);
-    Employee RECORD_3 = new Employee(3, "name3", "surname3", "department3", 3333);
+    Employee RECORD_1 = new Employee(1L, "name1", "surname1", "department1", 1111);
+    Employee RECORD_2 = new Employee(2L, "name2", "surname2", "department2", 2222);
+    Employee RECORD_3 = new Employee(3L, "name3", "surname3", "department3", 3333);
 
     @Before
     public void setUp() {
@@ -70,7 +70,7 @@ public class MyRestControllerTest {
 
     @Test
     public void shouldReturnExistingEmployeeById() throws Exception {
-        Mockito.when(employeeService.getEmployeeById(RECORD_1.getId())).thenReturn(RECORD_1);
+        Mockito.when(employeeService.getEmployeeById(RECORD_1.getEmployeeId())).thenReturn(RECORD_1);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/api/employees/1")
@@ -97,7 +97,7 @@ public class MyRestControllerTest {
     @Test
     public void shouldAddNewEmployee() throws Exception {
         Employee employee1 = Employee.builder()
-                .id(1)
+                .employeeId(1L)
                 .name("name1")
                 .surname("surname1")
                 .department("department1")
@@ -122,7 +122,7 @@ public class MyRestControllerTest {
     @Test
     public void shouldUpdateExistingEmployee() throws Exception {
         Employee updatedEmployee1 = Employee.builder()
-                .id(1)
+                .employeeId(1L)
                 .name("updatedName1")
                 .surname("surname1")
                 .department("department1")

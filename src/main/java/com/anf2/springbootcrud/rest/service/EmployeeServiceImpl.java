@@ -38,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public Employee getEmployeeById(int id) {
+    public Employee getEmployeeById(long id) {
         return employeeDao.getEmployees(id);
     }
 
@@ -49,7 +49,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public void deleteEmployeeById(int id) {
+    public void deleteEmployeeById(long id) {
         employeeDao.deleteEmployeeById(id);
     }
 
