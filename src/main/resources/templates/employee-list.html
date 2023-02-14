@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+</head>
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+<body>
+<div th:switch="${allEmployee}">
+    <h2 th:case="null">No employee found!</h2>
+    <div th:case="*">
+        <h2>        Employees</h2>
+        <table>
+            <tread>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Department</th>
+                <th>Salary</th>
+            </tr>
+            </tread>
+            <tbody>
+            <tr th:each="employee : ${allEmployee}">
+                <td th:text="${employee.employeeId}"></td>
+                <td th:text="${employee.name}"></td>
+                <td th:text="${employee.surname}"></td>
+                <td th:text="${employee.department}"></td>
+                <td th:text="${employee.salary}"></td>
+                <td><a th:href="@{employee-update/{id}(id=${employee.employeeId})}">Edit</a></td>
+                <td><a th:href="@{employee-delete/{id}(id=${employee.employeeId})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/createNewEmployee">Create new employee</a></p>
+</div>
+</body>
+</html>

@@ -12,5 +12,5 @@ import javax.transaction.Transactional;
 public interface EmployeeJpaRepository extends JpaRepository<Employee, Long> {
     @Modifying
     @Query("delete from Employee where name=:emplName")
-    void deleteUsersByName(@Param("emplName") String emplName);
+    void deleteEmployeesByName(@Param("emplName") String emplName);
 }

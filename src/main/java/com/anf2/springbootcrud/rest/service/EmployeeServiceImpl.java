@@ -55,7 +55,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void deleteEmployeeByName(String name) {
-        employeeJpaRepository.deleteUsersByName(name);
+        employeeJpaRepository.deleteEmployeesByName(name);
 //        employeeCrudRepository.deleteByName(name);
+    }
+
+    @Override
+    public void save(Employee employee) {
+        employeeCrudRepository.save(employee);
     }
 }
