@@ -1,5 +1,6 @@
 package com.anf2.springbootcrud.rest.dao;
 
+import com.anf2.springbootcrud.rest.entity.Device;
 import com.anf2.springbootcrud.rest.entity.Employee;
 
 //import org.hibernate.Session;
@@ -34,8 +35,15 @@ public class EmployeeDaoImpl implements EmployeeDao{
 //        Session session = entityManager.unwrap(Session.class);
 //        session.saveOrUpdate(employee);
 
+        List<Device> devices = employee.getDevices();
+
+        for(Device device : devices) {
+            device.setEmployee(employee);
+        }
+
         Employee newEmployee = entityManager.merge(employee);
         employee.setEmployeeId(newEmployee.getEmployeeId());
+        employee.setDepartment(newEmployee.getDepartment());
     }
 
     @Override
@@ -55,9 +63,14 @@ public class EmployeeDaoImpl implements EmployeeDao{
 //        query.setParameter("employeeId", id);
 //        query.executeUpdate();
 
-        Query query = entityManager.createQuery("delete from Employee where employeeId =:employeeId");
-        query.setParameter("employeeId", employeeId);
-        query.executeUpdate();
+        Employee employee = entityManager.find(Employee.class, employeeId);
+        employee.getDevices().clear();
+        entityManager.merge(employee);
+        entityManager.remove(employee);
+
+//        Query query = entityManager.createQuery("delete from Employee where employeeId =:employeeId");
+//        query.setParameter("employeeId", employeeId);
+//        query.executeUpdate();
     }
 
     @Override

@@ -8,20 +8,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "employees")
-@Builder
+//@Builder
 @ApiModel(description = "Details about the Employee")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id")
     @ApiModelProperty(notes = "The unique id of the Employee")
-    private  Long employeeId;
+    private Long employeeId;
 
     @Column(name = "name")
     @ApiModelProperty(notes = "The Employee's name")
@@ -38,4 +40,12 @@ public class Employee {
     @Column(name = "salary")
     @ApiModelProperty(notes = "The Employee's salary")
     private int salary;
+
+
+    //    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "empl_id")
+    @OneToMany(mappedBy = "employee",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Device> devices;
 }
