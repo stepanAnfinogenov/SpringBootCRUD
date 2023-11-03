@@ -1,7 +1,5 @@
 # SpringBootCRUD
 
-https://www.linkedin.com/learning/topics/apache-spark-2?accountId=0&u=0&success=true&authUUID=EpwnqskKRTGs6Ge7HD5eMA%3D%3D
-
 
 Push to github ->
     Execute webhook ->
